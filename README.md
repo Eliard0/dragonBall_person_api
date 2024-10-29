@@ -1,4 +1,4 @@
-# Dragon Ball Character API
+# Dragon Ball API
 
 Este é um projeto que utiliza a [Dragon Ball API](https://dragonball-api.com/) para exibir informações sobre personagens do universo Dragon Ball em um aplicativo iOS.
 
