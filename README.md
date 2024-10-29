@@ -16,6 +16,5 @@ Este é um projeto que utiliza a [Dragon Ball API](https://dragonball-api.com/) 
 - URLSession para chamadas de API
 - Model-View-ViewModel (MVVM)
 
-## Screenshots
-
-![Screenshot](<img width="433" alt="Captura de Tela 2024-10-29 às 15 40 16" src="https://github.com/user-attachments/assets/d3ec695a-a968-4772-b0a0-2e0327012dea">)
+## Imagem
+<img width="433" alt="Captura de Tela 2024-10-29 às 15 40 16" src="https://github.com/user-attachments/assets/d3ec695a-a968-4772-b0a0-2e0327012dea"
