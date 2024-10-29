@@ -18,4 +18,4 @@ Este é um projeto que utiliza a [Dragon Ball API](https://dragonball-api.com/) 
 
 ## Screenshots
 
-![Screenshot](<img width="433" alt="Captura de Tela 2024-10-29 às 15 40 16" src="https://github.com/user-attachments/assets/d3ec695a-a968-4772-b0a0-2e0327012dea">) <!-- Adicione uma captura de tela do seu aplicativo aqui -->
+![Screenshot](<img width="433" alt="Captura de Tela 2024-10-29 às 15 40 16" src="https://github.com/user-attachments/assets/d3ec695a-a968-4772-b0a0-2e0327012dea">)
