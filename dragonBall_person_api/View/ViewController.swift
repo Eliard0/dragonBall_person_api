@@ -7,9 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate {
     private let viewModel = DataViewModel()
     private var collectionView: UICollectionView!
+    private var searchBar: UISearchBar!
     
     private let layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -21,11 +22,25 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .brown
+        view.backgroundColor = .white
         
+        setUpSearchBar()
         setupCollectionView()
         setupBindings()
         viewModel.getPerson()
+        setConstraints()
+    }
+    
+    private func setUpSearchBar(){
+        searchBar = UISearchBar()
+        searchBar.delegate = self
+        searchBar.placeholder = "Pesquisar personagem"
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        
+        searchBar.backgroundImage = UIImage()
+        
+        view.addSubview(searchBar)
+        
     }
     
     
@@ -37,7 +52,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         collectionView.register(DataCell.self, forCellWithReuseIdentifier: "DataCell")
         
         view.addSubview(collectionView)
-        setConstraints()
     }
     
     private func setupBindings() {
@@ -46,13 +60,28 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.filterData(by: searchText)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
     func setConstraints(){
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

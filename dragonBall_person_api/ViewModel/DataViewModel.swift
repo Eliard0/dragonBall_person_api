@@ -8,7 +8,8 @@
 import Foundation
 
 class DataViewModel {
-    private(set) var data: [Data] = []
+    private var data: [Data] = []
+    private var filterData: [Data] = []
     var updateData: (()-> Void)?
     private var isLoading = false
     
@@ -26,23 +27,32 @@ class DataViewModel {
             do {
                 let dataResponse = try JSONDecoder().decode(DataResponse.self, from: data)
                 self.data = dataResponse.items
+                self.filterData = self.data
                 
                 DispatchQueue.main.async {
                     self.updateData?()
                 }
-                print(dataResponse)
             } catch {
                 print("Erro ao decodificar JSON: \(error)")
             }
         }.resume()
     }
     
+    func filterData(by name: String){
+        if name.isEmpty {
+            filterData = data
+        } else {
+            filterData = data.filter { $0.name.lowercased().contains(name.lowercased()) }
+        }
+        updateData?()
+    }
+    
     func numberOfItems() -> Int {
-        return data.count
+        return filterData.count
     }
     
     func data(at index: Int) -> Data {
-        return data[index]
+        return filterData[index]
     }
     
 }
