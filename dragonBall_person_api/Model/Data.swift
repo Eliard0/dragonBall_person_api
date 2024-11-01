@@ -9,5 +9,8 @@ struct Data: Decodable {
     let id: Int
     let name: String
     let image: String?
+    let ki: String
+    let maxKi: String
+    let race: String
 }
 

@@ -31,6 +31,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         setConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     private func setUpSearchBar(){
         searchBar = UISearchBar()
         searchBar.delegate = self
@@ -70,7 +80,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func setConstraints(){
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
             searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
@@ -93,5 +103,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let character = viewModel.data(at: indexPath.row)
         cell.configure(with: character)
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let person = viewModel.data(at: indexPath.row)
+        let viewDetail = DetailPersonViewController()
+        viewDetail.dataPerson = person
+        
+        let backButtonItem = UIBarButtonItem(title: "Voltar", style: .plain, target: nil, action: nil)
+            navigationItem.backBarButtonItem = backButtonItem
+        
+        navigationController?.pushViewController(viewDetail, animated: true)
     }
 }

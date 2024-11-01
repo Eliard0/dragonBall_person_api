@@ -22,7 +22,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             if let window = self.window {
                 let mainVC = ViewController()
-                window.rootViewController = mainVC
+                let navigationController = UINavigationController(rootViewController: mainVC)
+                window.rootViewController = navigationController
                 UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
             }
         }
